@@ -1,0 +1,2 @@
+rootProject.name = "KtApp1"
+include ':app'
