@@ -1,20 +1,34 @@
+/**
+ * Dice.kt
+ * Dice class for executing the logic of dice roll.
+ * Business logic should be added to the class.
+ */
 package com.example.ktapp
 
-class Dice(private val side: Int) {
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 
-    fun rollDice(): Int {
-        val currentSide = 1..side
-        val result = currentSide.random();
-        //TODO : for testing only , added one number as lucky number
-        val luckyNumber = 4
-        when (result) {
-            luckyNumber -> println("You won!")
-            1 -> println("So sorry! You rolled a 1. Try again!")
-            2 -> println("Sadly, you rolled a 2. Try again!")
-            3 -> println("Unfortunately, you rolled a 3. Try again!")
-            5 -> println("Don't cry! You rolled a 5. Try again!")
-            6 -> println("Apologies! You rolled a 6. Try again!")
-        }
-        return result
+class Dice(side: Int) {
+
+    /**
+     * Live dice data class
+     */
+    private val mutableDiceData: MutableLiveData<DiceData> = MutableLiveData()
+
+    /**
+     * To store the
+     */
+    private val currentSide = 1..side
+
+    /**
+     * Method to execute the rolling of dice
+     */
+    fun rollDice(): MutableLiveData<DiceData> {
+        //To get a random cube side
+        val random = currentSide.random();
+        val value = DiceData(random)
+        Log.d("RK" , "Value : $value")
+        mutableDiceData.value = value;
+        return mutableDiceData
     }
 }
